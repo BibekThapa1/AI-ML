@@ -10,23 +10,23 @@ load_dotenv()
 
 case = bool(input("Welcome to the game. Press y to continue and enter to discontinue. "))
 
-while case:
-    question = input("Ask anything ")
-    llm = HuggingFaceEndpoint(
-        repo_id="deepseek-ai/DeepSeek-R1-0528",
-        task="text-generation",
-        max_new_tokens=200,
-        do_sample=False,
-        repetition_penalty=1.03,
-        provider="auto"
-    )
 
-    chat_model = ChatHuggingFace(llm=llm)
+question = input("Ask anything ")
+llm = HuggingFaceEndpoint(
+    repo_id="deepseek-ai/DeepSeek-R1-0528",
+    task="text-generation",
+    max_new_tokens=200,
+    do_sample=False,
+    repetition_penalty=1.03,
+    provider="auto"
+)
 
-    result = chat_model.invoke(question)
-    print(result.content)
+chat_model = ChatHuggingFace(llm=llm)
 
-    case = bool(input("Type y to continue. Press enter to discontinue. "))
+result = chat_model.invoke(question)
+print(result.content)
+
+case = bool(input("Type y to continue. Press enter to discontinue. "))
 
 
 print("========")
