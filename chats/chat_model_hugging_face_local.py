@@ -1,15 +1,30 @@
-from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from langchain_huggingface import HuggingFacePipeline
 
-llm = HuggingFacePipeline.from_model_id(
-    model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-    task="text-generator",
-    pipeline_kwargs={
-        "max_new_tokens":100,
-        "temperature":0.5
-    }
+print("=============")
+model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+print("=============")
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    device_map="auto",
 )
-model = ChatHuggingFace(llm=llm)
 
-result = model.invoke("What is the capital city of South Korea")
+pipe = pipeline(
+    "text-generation",
+    model=model,
+    tokenizer=tokenizer,
+    max_new_tokens=512,
+    temperature=0.7,
+)
+print("=============")
 
-print(result.content)
+llm = HuggingFacePipeline(pipeline=pipe)
+print("=============")
+
+result = llm.invoke("Explain LangChain in simple words")
+print("=============")
+
+print(result)

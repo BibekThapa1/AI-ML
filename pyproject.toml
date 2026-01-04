@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "accelerate>=1.12.0",
     "dotenv>=0.9.9",
     "huggingface-hub>=0.36.0",
     "langchain>=1.2.0",
@@ -12,6 +13,8 @@ dependencies = [
     "langchain-google-genai>=4.1.2",
     "langchain-huggingface>=1.2.0",
     "scikit-learn>=1.8.0",
+    "sentence-transformers>=5.2.0",
     "streamlit>=1.52.2",
+    "torch>=2.9.1",
     "transformers>=4.57.3",
 ]
